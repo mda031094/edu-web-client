@@ -1,11 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { 
+    HttpModule,
+    BaseRequestOptions,
+ } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { LoginModule } from './login/login.module';
+import { fakeBackendProvider } from "./helpers";
 import { AuthenticationService } from './services';
 
 @NgModule({
@@ -21,6 +26,9 @@ import { AuthenticationService } from './services';
   ],
   providers: [
     AuthenticationService,
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions,
   ],
   bootstrap: [AppComponent]
 })
