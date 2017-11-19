@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+const APP_SERVER = "http://127.0.0.1:5000/";
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http) { }
+    public jwtHelper
+    constructor(private http: Http) {
+        this.jwtHelper = new JwtHelper();
+     }
 
-    login(username: string, password: string) {
-        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-            .map((response: Response) => {
-                let user = response.json();
-                if (user && user.token) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-            });
+    public login(username: string, password: string): Observable<any> {
+        const options: RequestOptions = new RequestOptions({
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        const path = `${APP_SERVER}auth`;
+        return this.http.post(path, JSON.stringify({ 'username': username, 'password': password }), options)
+            .map((response: Response) => response.json())
+            .catch((error: Error) => Observable.throw(error || 'Server error'));
     }
 
     logout() {
