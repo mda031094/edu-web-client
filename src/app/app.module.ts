@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { HttpModule, Http, RequestOptions, BaseRequestOptions } from '@angular/http';
 import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -10,6 +11,8 @@ import { LoginModule } from './login/login.module';
 import { MainModule } from "./main/main.module";
 import { AuthenticationService } from './services';
 import { SignUpModule } from './sign-up/sign-up.module';
+
+import { fakeBackendProvider } from "./helpers";
 
 @NgModule({
   declarations: [
@@ -25,12 +28,15 @@ import { SignUpModule } from './sign-up/sign-up.module';
     SignUpModule,
   ],
   providers: [
-    AuthHttp,
-     {
-        provide: AuthHttp,
-        useFactory: authHttpServiceFactory,
-        deps: [Http, RequestOptions]
-     },
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions,
+    // AuthHttp,
+    //  {
+    //     provide: AuthHttp,
+    //     useFactory: authHttpServiceFactory,
+    //     deps: [Http, RequestOptions]
+    //  },
     AuthenticationService,
   ],
   bootstrap: [AppComponent]
