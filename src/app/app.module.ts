@@ -1,16 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { 
-    HttpModule,
-    BaseRequestOptions,
- } from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { HttpModule } from '@angular/http';
+import { provideAuth } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { LoginModule } from './login/login.module';
-import { fakeBackendProvider } from "./helpers";
+import { MainModule } from "./main/main.module";
 import { AuthenticationService } from './services';
 
 @NgModule({
@@ -22,13 +19,14 @@ import { AuthenticationService } from './services';
     BrowserAnimationsModule,
     routing,
     LoginModule,
+    MainModule,
     HttpModule,
   ],
   providers: [
     AuthenticationService,
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions,
+    provideAuth({
+      headerPrefix: 'JWT'
+    }),
   ],
   bootstrap: [AppComponent]
 })

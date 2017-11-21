@@ -6,7 +6,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     const MOCK_PASSWORD = "test";
     const MOCK_FIRST_NAME = "Natasha";
     const MOCK_LAST_NAME = "Belyaeva";
-    const MOCK_TOKEN = "fake-jwt-token";
+    const MOCK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ";
 
     backend.connections.subscribe((connection: MockConnection) => {
         setTimeout(() => {
