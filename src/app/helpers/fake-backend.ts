@@ -11,7 +11,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     backend.connections.subscribe((connection: MockConnection) => {
         setTimeout(() => {
 
-            if (connection.request.url.endsWith('/api/authenticate') && connection.request.method === RequestMethod.Post) {
+            if (connection.request.url.endsWith('/auth') && connection.request.method === RequestMethod.Post) {
                 let params = JSON.parse(connection.request.getBody());
  
                 if (MOCK_USERNAME === params.username && MOCK_PASSWORD === params.password) {
@@ -22,7 +22,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
                             username: MOCK_USERNAME,
                             firstName: MOCK_FIRST_NAME,
                             lastName: MOCK_LAST_NAME,
-                            token: MOCK_TOKEN,
+                            access_token: MOCK_TOKEN,
                         }
                     })));
                 } else {
