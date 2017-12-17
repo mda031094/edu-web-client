@@ -15,18 +15,25 @@ export class UserService {
     }
 
     public getUser(): Observable<UserModel> {
-        const token = localStorage.getItem('token');
-        console.log(token)
-        const options: RequestOptions = new RequestOptions({
-            headers: new Headers({ 
-                'Content-Type': 'application/json',
-                Authorization: `JWT ${token}`
-            })
-        });
-        const path = `${APP_SERVER}userinfo`;
-        return this.http.get(path, options)
-            .map((response: Response) => response.json())
-            .catch((error: Error) => Observable.throw('Server error'));
-    }
+        // const token = localStorage.getItem('token');
+        // console.log(token)
+        // const options: RequestOptions = new RequestOptions({
+        //     headers: new Headers({ 
+        //         'Content-Type': 'application/json',
+        //         Authorization: `JWT ${token}`
+        //     })
+        // });
+        // const path = `${APP_SERVER}userinfo`;
+        // return this.http.get(path, options)
+        //     .map((response: Response) => response.json())
+        //     .catch((error: Error) => Observable.throw('Server error'));
 
+        return Observable.of({
+            id: 1,
+            firstName: "Nataly",
+            lastName: "Belyaeva",
+            login: "login",
+            email: "email"
+        } as UserModel)
+    }
 }
