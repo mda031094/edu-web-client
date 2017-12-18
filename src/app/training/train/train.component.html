@@ -1,6 +1,7 @@
 <div fxLayoutAlign="center center"  fxFlex="100" fullscreen >
     <form role="form" (submit)="answer()" fxLayout="column" fxFlex="30" fxFlex.sm="40" fxFlex.xs="80">
         <mat-card fxLayoutAlign="center" fxLayout="column">
+            <div>Выбери подходящий перевод слову {{word}}.</div>
             <mat-radio-group [(ngModel)]="selectedIndex" name="selectedIndex" fxLayout="column" >
                 <mat-radio-button *ngFor="let answer of answers; let i = index" 
                     [value]="i"

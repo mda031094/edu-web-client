@@ -32,6 +32,10 @@ export class TrainComponent {
         return this.training ? this.training.answers : [];
     }
 
+    public get word(): string {
+        return this.training ? this.training.word : "";
+    }
+
     public trackByIndex(index: number, value: string): number {
         return index;
     }
