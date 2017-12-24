@@ -12,10 +12,6 @@ import { TrainingModel } from "../../models/training";
     selector: '<train></train>'
 })
 export class TrainComponent {
-
-    // @Input()
-    // public training: TrainingModel;
-
     @Output()
     public answerTest: EventEmitter<boolean> = new EventEmitter<boolean>();
 
